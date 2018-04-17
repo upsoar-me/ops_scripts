@@ -11,6 +11,12 @@ do
         then
             `scp ~/riad_check/hpacucli-9.40-12.0.x86_64.rpm $ip:~`
             sleep 2
+            # if [ $? -ne 0 ]
+            #    then
+            #        echo 【文件传输失败】
+            # else
+            #        echo 【文件传输成功】
+            # fi            
             ssh -Tq $ip rpm -ivh ~/hpacucli-9.40-12.0.x86_64.rpm
             sleep 2
             disk_type=$(ssh -Tq $ip /opt/compaq/hpacucli/bld/./hpacucli ctrl all show config detail |grep 'Interface Type' | awk 'NR==1{print $3}')
